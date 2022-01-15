@@ -3,6 +3,7 @@ import { Button, Container, Stack } from "react-bootstrap";
 import AddBudgetModal from "./components/AddBudgetModal";
 import AddExpenseModal from "./components/AddExpenseModal";
 import BudgetCard from "./components/BudgetCard";
+import UncategorizedBudgetCard from "./components/UncategorizedBudgetCard";
 import { UNCATEGORIZED_BUDGET_ID, useBudgets } from "./contexts/BudgetContext";
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
             max={ budget.max }
             onAddExpenseClick={ () => openAddExpenseModal(budget.id) }
           />) }
-          
+          <UncategorizedBudgetCard />
         </div>
       </Container>
       <AddBudgetModal 
