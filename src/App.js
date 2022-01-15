@@ -11,7 +11,7 @@ function App() {
     <div className="budget-grid">
       <BudgetCard name="Entertainment" amount={200} max={1000}></BudgetCard> 
     </div>
-  </Container>;
+  </Container>
 }
 
 export default App;
