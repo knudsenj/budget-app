@@ -1,5 +1,4 @@
-import { useRef } from "react";
-import { Button, Form, Modal, Stack } from "react-bootstrap";
+import { Button, Modal, Stack } from "react-bootstrap";
 import { UNCATEGORIZED_BUDGET_ID, useBudgets } from "../contexts/BudgetContext";
 import { currencyFormatter } from "../utils";
 
