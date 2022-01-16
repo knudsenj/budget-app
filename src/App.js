@@ -13,7 +13,7 @@ function App() {
   const [isAddExpenseModalVisible, setIsAddExpenseModalVisible] = useState(false)
   const [addExpenseModalId, setAddExpenseModalId] = useState()
   const [viewExpenseModalId, setViewExpenseModalId] = useState()
-  const { budgets, getBudgetExpenses } = useBudgets()
+  const { budgets, expenses, getBudgetExpenses } = useBudgets()
 
   function openAddExpenseModal(budgetId) {
     setIsAddExpenseModalVisible(true)
@@ -28,21 +28,26 @@ function App() {
           <Button variant="primary" onClick={ () => setIsAddBudgetModalVisible(true) }>Add Budget</Button>
           <Button variant="outline-primary" onClick={ () => openAddExpenseModal(UNCATEGORIZED_BUDGET_ID) }>Add Expense</Button>
         </Stack>
-        <div className="budget-grid">
-          { budgets.map(budget => <BudgetCard 
-            key={ budget.id }
-            name={ budget.name } 
-            amount={ getBudgetExpenses(budget.id).reduce((a, c) => a + c.amount, 0) } 
-            max={ budget.max }
-            onAddExpenseClick={ () => openAddExpenseModal(budget.id) }
-            onViewExpensesClick={ () => setViewExpenseModalId(budget.id) }
-          />) }
-          <UncategorizedBudgetCard 
-            onAddExpenseClick={ () => openAddExpenseModal(UNCATEGORIZED_BUDGET_ID) } 
-            onViewExpensesClick={ () => setViewExpenseModalId(UNCATEGORIZED_BUDGET_ID) }
-          />
-          <TotalBudgetCard />
-        </div>
+        { budgets.length && expenses.length 
+          ? <div className="budget-grid">
+            { budgets.map(budget => <BudgetCard 
+              key={ budget.id }
+              name={ budget.name } 
+              amount={ getBudgetExpenses(budget.id).reduce((a, c) => a + c.amount, 0) } 
+              max={ budget.max }
+              onAddExpenseClick={ () => openAddExpenseModal(budget.id) }
+              onViewExpensesClick={ () => setViewExpenseModalId(budget.id) }
+            />) }
+            <UncategorizedBudgetCard 
+              onAddExpenseClick={ () => openAddExpenseModal(UNCATEGORIZED_BUDGET_ID) } 
+              onViewExpensesClick={ () => setViewExpenseModalId(UNCATEGORIZED_BUDGET_ID) }
+            />
+            <TotalBudgetCard />
+          </div>
+          : <div className="text-center">
+            <em>You have no budgets, get started by pressing the Add Budget button above</em>
+          </div>
+        }
       </Container>
       <AddBudgetModal 
         show={ isAddBudgetModalVisible } 

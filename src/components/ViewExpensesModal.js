@@ -35,19 +35,24 @@ export default function ViewExpensesModal(props) {
       </Modal.Header>
 
       <Modal.Body>
-        <Stack direction="vertical" gap="3">
-          { expenses.map(expense => (
-            <Stack direction="horizontal" gap="2" key={expense.id}>
-              <div className="me-auto fs-4">{expense.description}</div>
-              <div className="fs-5">{ currencyFormatter.format(expense.amount) }</div>
-              <Button 
-                size="sm" 
-                variant="outline-danger"
-                onClick={ () => deleteExpense(expense) }
-              >&times;</Button>
-            </Stack>
-          ))}
-        </Stack>
+        { expenses.length 
+          ? <Stack direction="vertical" gap="3">
+            { expenses.map(expense => (
+              <Stack direction="horizontal" gap="2" key={expense.id}>
+                <div className="me-auto fs-4">{expense.description}</div>
+                <div className="fs-5">{ currencyFormatter.format(expense.amount) }</div>
+                <Button 
+                  size="sm" 
+                  variant="outline-danger"
+                  onClick={ () => deleteExpense(expense) }
+                >&times;</Button>
+              </Stack>
+            ))}
+          </Stack>
+          : <div className="text-center">
+              <em>There are no expenses for { budget.name }</em>
+            </div>
+        }
       </Modal.Body>
     </Modal>
   )
