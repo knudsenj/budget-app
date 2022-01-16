@@ -40,7 +40,10 @@ export default function BudgetCard(props) {
             className="ms-auto"
             onClick={ props.onAddExpenseClick }
           >Add Expense</Button>
-          <Button variant="outline-secondary">View Expense</Button>
+          <Button 
+            variant="outline-secondary"
+            onClick={ props.onViewExpensesClick }
+          >View Expenses</Button>
         </Stack> }
       </Card.Body>
     </Card>
